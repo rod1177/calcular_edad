@@ -15,14 +15,12 @@ document.addEventListener("DOMContentLoaded", () => {
         setTimeout(() => inp.classList.remove("error"), 800);
     }
 
-    // ✅ Bloquea cualquier carácter no numérico desde teclado y pegado
     function bloquear_ingreso(inp, min, max, maxLength = 4, parcial = false) {
         inp.maxLength = maxLength;
 
-        // --- BLOQUEO DE TECLADO ---
         inp.addEventListener("beforeinput", (e) => {
-            if (e.inputType.startsWith("delete")) return; // permitir borrar
-            if (e.data && !/^\d+$/.test(e.data)) { // bloquear si no es número
+            if (e.inputType.startsWith("delete")) return;
+            if (e.data && !/^\d+$/.test(e.data)) { 
                 e.preventDefault();
                 marError(inp);
                 return;
@@ -51,10 +49,9 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
 
-        // --- BLOQUEO DE PEGADO ---
         inp.addEventListener("paste", (e) => {
             const paste = (e.clipboardData.getData("text") || "").trim();
-            if (!/^\d+$/.test(paste)) { // solo números
+            if (!/^\d+$/.test(paste)) { 
                 e.preventDefault();
                 marError(inp);
                 return;
