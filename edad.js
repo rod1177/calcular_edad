@@ -99,7 +99,7 @@ document.addEventListener("DOMContentLoaded", () => {
             marError(dia_Ingreso);
             marError(mes_Ingreso);
             marError(año_Ingreso);
-            return mostrar_Resultado("Fecha futura", "", "");
+            return mostrar_Resultado("La fecha solo se ", "calculara hasta ", "el dia de hoy");
         }
 
         let años = hoy.getFullYear() - nacimiento.getFullYear();
