@@ -103,15 +103,11 @@ document.addEventListener("DOMContentLoaded", () => {
             return mostrar_Resultado("Año fuera de rango", "", "");
         }
 
-        if (mes < 1 || mes > 12) {
-            marError(mes_Ingreso);
-            return mostrar_Resultado("Mes inválido", "", "");
-        }
 
         const dias_Mes = new Date(año, mes, 0).getDate();
         if (dia < 1 || dia > dias_Mes) {
             marError(dia_Ingreso);
-            return mostrar_Resultado(`Día no válido (1-${dias_Mes})`, "", "");
+            return mostrar_Resultado(`Día no válido`, `(1-${dias_Mes})`, "");
         }
 
         let años = hoy.getFullYear() - nacimiento.getFullYear();
