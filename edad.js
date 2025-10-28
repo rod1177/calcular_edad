@@ -8,7 +8,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const año_resultado = document.getElementById("Años");
 
     const año_Actual = new Date().getFullYear();
+    const dia_Actual = new Date().getDate()
+    const mes_Actual = new Date().getMonth()
     const año_min = 1920;
+
+    console.log(mes_Actual)
 
     function marError(inp) {
         inp.classList.add("error");
@@ -83,7 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
             marError(dia_Ingreso);
             marError(mes_Ingreso);
             marError(año_Ingreso);
-            mostrar_Resultado("Ingrese", " una fecha menor", "a: " + dia + "/" + mes + "/" + año);
+            mostrar_Resultado("Ingrese", " una fecha menor", "a: " + dia_Actual + "/" + (mes_Actual+1) + "/" + año_Actual);
 
             if (año > hoy.getFullYear()) año_Ingreso.value = hoy.getFullYear();
             if (año === hoy.getFullYear() && mes > hoy.getMonth() + 1)
