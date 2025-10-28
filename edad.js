@@ -19,8 +19,8 @@ document.addEventListener("DOMContentLoaded", () => {
         inp.maxLength = maxLength;
 
         inp.addEventListener("beforeinput", (e) => {
-            if (e.inputType.startsWith("delete")) return;
-            if (e.data && !/^\d+$/.test(e.data)) { 
+            if (e.inputType.startsWith("delete")) return
+            if (e.data && !/^\d+$/.test(e.data)) {
                 e.preventDefault();
                 marError(inp);
                 return;
@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         inp.addEventListener("paste", (e) => {
             const paste = (e.clipboardData.getData("text") || "").trim();
-            if (!/^\d+$/.test(paste)) { 
+            if (!/^\d+$/.test(paste)) {
                 e.preventDefault();
                 marError(inp);
                 return;
@@ -78,6 +78,26 @@ document.addEventListener("DOMContentLoaded", () => {
             return mostrar_Resultado("---", "---", "---");
         }
 
+        const nacimiento = new Date(año, mes - 1, dia);
+        if (nacimiento > hoy) {
+            marError(dia_Ingreso);
+            marError(mes_Ingreso);
+            marError(año_Ingreso);
+            mostrar_Resultado("Ingrese", " una fecha menor", "a: " + dia + "/" + mes + "/" + año);
+
+            if (año > hoy.getFullYear()) año_Ingreso.value = hoy.getFullYear();
+            if (año === hoy.getFullYear() && mes > hoy.getMonth() + 1)
+                mes_Ingreso.value = hoy.getMonth() + 1;
+            if (
+                año === hoy.getFullYear() &&
+                mes === hoy.getMonth() + 1 &&
+                dia > hoy.getDate()
+            )
+                dia_Ingreso.value = hoy.getDate();
+
+            return;
+        }
+
         if (año < año_min || año > año_Actual) {
             marError(año_Ingreso);
             return mostrar_Resultado("Año fuera de rango", "", "");
@@ -92,14 +112,6 @@ document.addEventListener("DOMContentLoaded", () => {
         if (dia < 1 || dia > dias_Mes) {
             marError(dia_Ingreso);
             return mostrar_Resultado(`Día no válido (1-${dias_Mes})`, "", "");
-        }
-
-        const nacimiento = new Date(año, mes - 1, dia);
-        if (nacimiento > hoy) {
-            marError(dia_Ingreso);
-            marError(mes_Ingreso);
-            marError(año_Ingreso);
-            return mostrar_Resultado("La fecha solo se ", "calculara hasta ", "el dia de hoy");
         }
 
         let años = hoy.getFullYear() - nacimiento.getFullYear();
